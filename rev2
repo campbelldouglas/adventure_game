@@ -1,0 +1,70 @@
+import time
+import random
+health = int(100)
+enemy_adjective = ["Evil", "Drunken", "Mean", "Notorious", "Scary", "Bad", "Wicked", "Foul", "Vile"]
+enemy_noun = ["Pirate", "Gorgon", "Knight", "Fairy", "Demon", "Samurai", "Jester", "Dragon"]
+weapon_adjective = ["Magic" , "Amazing", "Super Strong", "Powerful"]
+weapon_noun = ["Dagger", "Sword", "Bow", "Wand", "Spear", "Axe", "Mace", "Club"]
+enemy = (random.choice(enemy_adjective) + " " + random.choice(enemy_noun))
+weapon = 0
+
+
+def print_pause(message_to_print):
+    print(message_to_print)
+    time.sleep(0.1)
+    
+def intro():
+    print_pause("You find yourself standing in an open field, filled with grass and yellow wildflowers.")
+    print_pause("Rumor has it that a " + enemy +  " is somewhere around here, and has been terrifying the nearby village.")
+    print_pause("In front of you is a house.")
+    print_pause("To your right is a dark cave.")
+    print_pause("In your hand you hold your trusty (but not very effective) boring knife.")
+
+def player_navigation():
+    print_pause("Enter '1' to knock on the door of the house")
+    print_pause("Enter '2' to peer into the cave.")
+    print_pause("What would you like to do?")
+    print(weapon)
+
+
+def player_decision():
+    user_choice = int(input("(Please enter 1 or 2). \n"))
+    if user_choice == 1:
+        fight()
+    elif user_choice == 2:
+        cave()
+    else:
+        player_decision()
+
+def fight():
+    if 0 in weapon:
+        print_pause("You lose")
+        end_game = input("Would you like to play again? \n ")
+        if "y" in end_game:
+            play_game()
+        else:
+            quit()
+            
+    else:
+        print_pause("You win with your " + weapon + "! congrats")
+    
+def cave():
+    weapon = (random.choice(weapon_adjective) + " " + random.choice(weapon_noun))
+    print_pause("You peer cautiously into the cave.")
+    print_pause("It turns out to be only a very small cave.")
+    print_pause("Your eye catches a glint of metal behind a rock.")
+    print_pause("You have found the " + weapon + "!")
+    print_pause("You disgard your silly old stick and bring the " + weapon + " with you.")
+    print_pause("You walk back out to the field.")
+    player_navigation()
+    player_decision()
+    print(weapon)
+                                                                                             
+def play_game():
+    intro()
+    player_navigation()
+    player_decision()
+    fight()
+
+
+play_game()
